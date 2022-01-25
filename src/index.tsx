@@ -116,6 +116,8 @@ type Props = {
   callbackThreshold?: number
   borderRadius?: number
   overflow?: 'visible' | 'hidden'
+  // Defaults to 100
+  zIndex?: number
 }
 
 type State = {
@@ -793,6 +795,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
 
   render() {
     const { borderRadius } = this.props
+    const zIndex = this.props.zIndex || 100
     return (
       <>
         <Animated.View
@@ -807,7 +810,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
           style={{
             width: '100%',
             position: 'absolute',
-            zIndex: 100,
+            zIndex: zIndex,
             opacity: cond(this.height, 1, 0),
             transform: [
               {
@@ -832,7 +835,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
           >
             <Animated.View
               style={{
-                zIndex: 101,
+                zIndex: zIndex + 1,
               }}
               onLayout={this.handleLayoutHeader}
             >
